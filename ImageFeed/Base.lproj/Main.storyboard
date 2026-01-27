@@ -68,6 +68,11 @@
                                                 <constraint firstItem="Y8v-JJ-Bn9" firstAttribute="leading" secondItem="nl4-f2-8Wp" secondAttribute="leadingMargin" constant="8.0000000000000071" id="zRC-DU-k43"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellImage" destination="nl4-f2-8Wp" id="YYA-sD-ibi"/>
+                                            <outlet property="dateLabel" destination="Y8v-JJ-Bn9" id="Uak-er-Rsb"/>
+                                            <outlet property="likeButton" destination="eU9-Os-MyX" id="AQt-Sl-r5t"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
