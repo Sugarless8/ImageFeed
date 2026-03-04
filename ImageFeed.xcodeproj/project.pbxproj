@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		50F7B7242F1EC2E7000D3619 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F7B71B2F1EC2E7000D3619 /* ImagesListViewController.swift */; };
+		50F7B72E2F20181B000D3619 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F7B72D2F201811000D3619 /* ImagesListCell.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		50605A9C2F0846F800C6C28C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +32,8 @@
 		50605A852F0846F700C6C28C /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50605A9B2F0846F800C6C28C /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50605AA52F0846F800C6C28C /* ImageFeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50F7B71B2F1EC2E7000D3619 /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
+		50F7B72D2F201811000D3619 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +95,7 @@
 		50605A7C2F0846F700C6C28C = {
 			isa = PBXGroup;
 			children = (
+				50F7B72F2F20199C000D3619 /* ImagesList */,
 				50605A872F0846F700C6C28C /* ImageFeed */,
 				50605A9E2F0846F800C6C28C /* ImageFeedTests */,
 				50605AA82F0846F800C6C28C /* ImageFeedUITests */,
@@ -103,6 +111,15 @@
 				50605AA52F0846F800C6C28C /* ImageFeedUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		50F7B72F2F20199C000D3619 /* ImagesList */ = {
+			isa = PBXGroup;
+			children = (
+				50F7B72D2F201811000D3619 /* ImagesListCell.swift */,
+				50F7B71B2F1EC2E7000D3619 /* ImagesListViewController.swift */,
+			);
+			path = ImagesList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +266,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50F7B72E2F20181B000D3619 /* ImagesListCell.swift in Sources */,
+				50F7B7242F1EC2E7000D3619 /* ImagesListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
