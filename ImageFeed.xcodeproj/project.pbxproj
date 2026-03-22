@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		508FEB082F5F623A007C7DCA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508FEB072F5F6231007C7DCA /* Constants.swift */; };
 		50F45EC12F2D58AD00799936 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F45EC02F2D54BC00799936 /* ProfileViewController.swift */; };
 		50F45EC42F31126600799936 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F45EC32F310F5D00799936 /* SingleImageViewController.swift */; };
 		50F7B7242F1EC2E7000D3619 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F7B71B2F1EC2E7000D3619 /* ImagesListViewController.swift */; };
@@ -34,6 +35,7 @@
 		50605A852F0846F700C6C28C /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50605A9B2F0846F800C6C28C /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50605AA52F0846F800C6C28C /* ImageFeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		508FEB072F5F6231007C7DCA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		50F45EC02F2D54BC00799936 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50F45EC32F310F5D00799936 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		50F7B71B2F1EC2E7000D3619 /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		50F7B72F2F20199C000D3619 /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
+				508FEB072F5F6231007C7DCA /* Constants.swift */,
 				50F7B72D2F201811000D3619 /* ImagesListCell.swift */,
 				50F7B71B2F1EC2E7000D3619 /* ImagesListViewController.swift */,
 			);
@@ -290,6 +293,7 @@
 			files = (
 				50F7B72E2F20181B000D3619 /* ImagesListCell.swift in Sources */,
 				50F45EC12F2D58AD00799936 /* ProfileViewController.swift in Sources */,
+				508FEB082F5F623A007C7DCA /* Constants.swift in Sources */,
 				50F45EC42F31126600799936 /* SingleImageViewController.swift in Sources */,
 				50F7B7242F1EC2E7000D3619 /* ImagesListViewController.swift in Sources */,
 			);
