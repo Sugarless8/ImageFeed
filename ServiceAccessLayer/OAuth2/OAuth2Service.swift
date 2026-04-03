@@ -3,7 +3,8 @@ import Foundation
 final class OAuth2Service {
     static let shared = OAuth2Service()
 
-    private let tokenStorage = OAuth2TokenStorage()
+    private let tokenStorage = OAuth2TokenStorage.shared
+    private let decoder = JSONDecoder()
 
     private init() { }
 
@@ -51,9 +52,11 @@ final class OAuth2Service {
                 return
             }
 
+            guard let self else { return }
+
             do {
-                let responseBody = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                self?.tokenStorage.token = responseBody.accessToken
+                let responseBody = try self.decoder.decode(OAuthTokenResponseBody.self, from: data)
+                self.tokenStorage.token = responseBody.accessToken
                 DispatchQueue.main.async {
                     completion(.success(responseBody.accessToken))
                 }
@@ -85,4 +88,11 @@ enum NetworkError: Error {
     case invalidRequest
     case decodingError
     case httpStatusCode(Int)
+}
+
+enum httpMedods: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
 }

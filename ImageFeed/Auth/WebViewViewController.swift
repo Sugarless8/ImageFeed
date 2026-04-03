@@ -13,6 +13,7 @@ protocol WebViewViewControllerDelegate: AnyObject {
 final class WebViewViewController: UIViewController {
     @IBOutlet private var webView: WKWebView!
     @IBOutlet private var progressView: UIProgressView!
+    private var isObservingProgress = false
 
     weak var delegate: WebViewViewControllerDelegate?
     
@@ -24,21 +25,30 @@ final class WebViewViewController: UIViewController {
         loadAuthView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // NOTE: Since the class is marked as `final` we don't need to pass a context.
-        // In case of inhertiance context must not be nil.
-        webView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard webView != nil else {
+            assertionFailure("webView is nil in viewWillAppear")
+            return
+        }
+        if !isObservingProgress {
+            webView.addObserver(
+                self,
+                forKeyPath: #keyPath(WKWebView.estimatedProgress),
+                options: .new,
+                context: nil)
+            isObservingProgress = true
+        }
         updateProgress()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        guard webView != nil else { return }
+        if isObservingProgress {
+            webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
+            isObservingProgress = false
+        }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -50,6 +60,10 @@ final class WebViewViewController: UIViewController {
     }
 
     private func updateProgress() {
+        guard let webView = webView, let progressView = progressView else {
+            print("updateProgress called but webView/progressView is nil")
+            return
+        }
         progressView.progress = Float(webView.estimatedProgress)
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
