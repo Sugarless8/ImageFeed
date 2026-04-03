@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EzQ-8h-iwc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="spl-VC-001">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
@@ -12,7 +12,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="hS3-4D-Svl">
             <objects>
-                <tabBarController id="WgC-7r-YP0" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="WgC-7r-YP0" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="90E-4F-2Mx">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -317,6 +317,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="b58-GH-YWL"/>
                     <connections>
+                        <outlet property="progressView" destination="z1k-1f-RYg" id="prg-VW-oLt"/>
                         <outlet property="webView" destination="EdP-1D-tfs" id="ous-EM-FHc"/>
                     </connections>
                 </viewController>
@@ -324,8 +325,36 @@
             </objects>
             <point key="canvasLocation" x="2196" y="1401"/>
         </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="spl-SC-001">
+            <objects>
+                <viewController id="spl-VC-001" customClass="SplashViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="spl-VW-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="spl-IV-001">
+                                <rect key="frame" x="160" y="388.5" width="73" height="75"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="spl-SG-001"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstItem="spl-IV-001" firstAttribute="centerX" secondItem="spl-VW-001" secondAttribute="centerX" id="spl-CX-001"/>
+                            <constraint firstItem="spl-IV-001" firstAttribute="centerY" secondItem="spl-VW-001" secondAttribute="centerY" id="spl-CY-001"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="EzQ-8h-iwc" kind="presentation" identifier="ShowAuthenticationScreen" modalPresentationStyle="fullScreen" id="spl-SG-002"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="spl-FR-001" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2232" y="128"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="splash_screen_logo" width="73" height="75.5"/>
         <image name="0" width="1600" height="1059"/>
         <image name="Backward" width="24" height="24"/>
         <image name="auth_screen_logo" width="60" height="60"/>
