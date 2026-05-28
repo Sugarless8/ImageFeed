@@ -1,18 +1,33 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-    private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
-
     private let storage = OAuth2TokenStorage.shared
+    private let profileService = ProfileService.shared
+
+    private let splashLogoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "splash_screen_logo"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "YP Black")
+        view.addSubview(splashLogoImageView)
+        NSLayoutConstraint.activate([
+            splashLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            splashLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if storage.token != nil {
-            switchToTabBarController()
+        if let token = storage.token {
+            fetchProfile(token: token)
         } else {
-            // Show Auth Screen
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            showAuthViewController()
         }
     }
 
@@ -25,6 +40,21 @@ final class SplashViewController: UIViewController {
         .lightContent
     }
 
+    private func showAuthViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        guard let navigationController = storyboard.instantiateViewController(
+            withIdentifier: "AuthViewController"
+        ) as? UINavigationController,
+        let authViewController = navigationController.viewControllers.first as? AuthViewController
+        else {
+            assertionFailure("Failed to instantiate AuthViewController")
+            return
+        }
+        authViewController.delegate = self
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
+
     private func switchToTabBarController() {
         guard let window = view.window else {
             assertionFailure("Invalid window configuration")
@@ -35,21 +65,23 @@ final class SplashViewController: UIViewController {
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
-}
 
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else {
-                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
-                return
+    private func fetchProfile(token: String) {
+        UIBlockingProgressHUD.show()
+        profileService.fetchProfile(token) { [weak self] result in
+            UIBlockingProgressHUD.dismiss()
+
+            guard let self = self else { return }
+
+            switch result {
+            case let .success(profile):
+                ProfileImageService.shared.fetchProfileImageURL(username: profile.username) { _ in }
+                self.switchToTabBarController()
+
+            case let .failure(error):
+                print(error)
+                break
             }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
         }
     }
 }
@@ -57,5 +89,7 @@ extension SplashViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
+
+        switchToTabBarController()
     }
 }

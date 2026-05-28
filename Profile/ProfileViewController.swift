@@ -5,6 +5,7 @@
 //  Created by Дмитрий Пахомов on 31.01.2026.
 //
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     // MARK:  UI Elements
@@ -52,12 +53,52 @@ final class ProfileViewController: UIViewController {
         return button
     }()
 
+    private var profileImageServiceObserver: NSObjectProtocol?
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypBlack
         setupLayout()
         exitButton.addTarget(self, action: #selector(didTapExitButton), for: .touchUpInside)
+        if let profile = ProfileService.shared.profile {
+            updateProfileDetails(with: profile)
+        }
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        updateAvatar()
+    }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        let processor = RoundCornerImageProcessor(cornerRadius: 35)
+        userPhotoView.kf.setImage(
+            with: url,
+            placeholder: UIImage(resource: .photo),
+            options: [.processor(processor)]
+        )
+    }
+
+    private func updateProfileDetails(with profile: Profile) {
+        nameLabel.text = profile.name.isEmpty
+            ? "Имя не указано"
+            : profile.name
+        loginNameLabel.text = profile.loginName.isEmpty
+            ? "@неизвестный_пользователь"
+            : profile.loginName
+        descriptionLabel.text = (profile.bio?.isEmpty ?? true)
+            ? "Профиль не заполнен"
+            : profile.bio
     }
 
     // MARK: - Actions

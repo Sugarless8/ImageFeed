@@ -1,0 +1,24 @@
+{
+  "originHash" : "4f1262b02214b8052b1c0bc3d3e9de852ad1b6572f8a12b02482aa2fe4de2657",
+  "pins" : [
+    {
+      "identity" : "progresshud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/relatedcode/ProgressHUD",
+      "state" : {
+        "revision" : "44e04c79ae75ed5e979df517ab13d8a1aa9b41a5",
+        "version" : "15.0.1"
+      }
+    },
+    {
+      "identity" : "swiftkeychainwrapper",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jrendel/SwiftKeychainWrapper",
+      "state" : {
+        "revision" : "185a3165346a03767101c4f62e9a545a0fe0530f",
+        "version" : "4.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}
