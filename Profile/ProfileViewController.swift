@@ -70,8 +70,8 @@ final class ProfileViewController: UIViewController {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
+                guard let self else { return }
+                updateAvatar()
             }
         updateAvatar()
     }

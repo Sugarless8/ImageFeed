@@ -4,12 +4,6 @@ struct ProfileImage: Codable {
     let small: String
     let medium: String
     let large: String
-
-    private enum CodingKeys: String, CodingKey {
-        case small
-        case medium
-        case large
-    }
 }
 
 struct UserResult: Codable {
@@ -24,11 +18,12 @@ final class ProfileImageService {
     static let shared = ProfileImageService()
     private init() {}
 
-    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
+    static let didChangeNotification = Notification.Name("ProfileImageProviderDidChange")
 
     private(set) var avatarURL: String?
 
     private var task: URLSessionTask?
+    private let decoder = JSONDecoder()
 
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
         task?.cancel()
@@ -49,7 +44,7 @@ final class ProfileImageService {
                 guard let self else { return }
 
                 do {
-                    let userResult = try JSONDecoder().decode(UserResult.self, from: data)
+                    let userResult = try self.decoder.decode(UserResult.self, from: data)
 
                     self.avatarURL = userResult.profileImage.small
                     completion(.success(userResult.profileImage.small))
@@ -80,7 +75,7 @@ final class ProfileImageService {
         }
 
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }

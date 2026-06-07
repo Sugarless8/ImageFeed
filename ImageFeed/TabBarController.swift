@@ -11,6 +11,6 @@ final class TabBarController: UITabBarController {
 
         let profileViewController = ProfileViewController()
 
-        self.viewControllers = [imagesListViewController, profileViewController]
+        viewControllers = [imagesListViewController, profileViewController]
     }
 }

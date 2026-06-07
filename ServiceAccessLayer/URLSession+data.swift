@@ -1,5 +1,12 @@
 import Foundation
 
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+}
+
 enum NetworkError: Error {
     case httpStatusCode(Int)
     case urlRequestError(Error)

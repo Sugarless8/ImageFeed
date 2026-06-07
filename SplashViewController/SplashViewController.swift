@@ -5,7 +5,7 @@ final class SplashViewController: UIViewController {
     private let profileService = ProfileService.shared
 
     private let splashLogoImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "splash_screen_logo"))
+        let imageView = UIImageView(image: UIImage(resource: .splashScreenLogo))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -13,7 +13,7 @@ final class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "YP Black")
+        view.backgroundColor = UIColor(resource: .ypBlack)
         view.addSubview(splashLogoImageView)
         NSLayoutConstraint.activate([
             splashLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

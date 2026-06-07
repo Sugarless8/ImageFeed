@@ -16,7 +16,7 @@ final class OAuth2Service {
 
     private(set) var authToken: String? {
         get {
-            return tokenStorage.token
+            tokenStorage.token
         }
         set {
             tokenStorage.token = newValue
@@ -84,7 +84,7 @@ final class OAuth2Service {
         }
 
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.post.rawValue
         return request
     }
 }
