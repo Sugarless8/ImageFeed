@@ -10,6 +10,11 @@ final class TabBarController: UITabBarController {
         )
 
         let profileViewController = ProfileViewController()
+        profileViewController.tabBarItem = UITabBarItem(
+            title: nil,
+            image: UIImage(resource: .tabProfileActive),
+            selectedImage: nil
+        )
 
         viewControllers = [imagesListViewController, profileViewController]
     }
